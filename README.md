@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  List of challenges in the Bootcamp GoStack 9 by RocketSeat
+  List of challenges in the Bootcamp GoStack 9 by Rocketseat
 </h3>
 
 <blockquote align="center">“Sua única limitação é você mesmo”!</blockquote>
