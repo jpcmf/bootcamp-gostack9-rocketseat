@@ -11,11 +11,13 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 
+routes.post('/users', UserController.store);
+routes.get('/users', UserController.index);
+
 routes.use(authMiddleware);
 routes.use(adminMiddleware);
 
-routes.post('/users', UserController.store);
-routes.put('/users', UserController.update);
+routes.put('/users/:id', UserController.update);
 
 routes.post('/students', StudentController.store);
 routes.put('/students/:id', StudentController.update);

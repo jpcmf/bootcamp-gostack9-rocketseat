@@ -39,7 +39,6 @@ class UserController {
   }
 
   async update(req, res) {
-    // console.log(req.userId);
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
@@ -90,7 +89,8 @@ class UserController {
   }
 
   async index(req, res) {
-    return res.json({});
+    const users = await User.findAll();
+    return res.json(users);
   }
 }
 
