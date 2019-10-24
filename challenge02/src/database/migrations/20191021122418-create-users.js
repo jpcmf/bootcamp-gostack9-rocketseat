@@ -20,6 +20,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      permission_level: {
+        type: Sequelize.STRING,
+        defaultValue: 'user',
+        allowNull: false,
+      },
       provider: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
