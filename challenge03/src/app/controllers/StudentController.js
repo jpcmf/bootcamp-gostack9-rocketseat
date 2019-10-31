@@ -2,6 +2,16 @@ import * as Yup from 'yup';
 import Student from '../models/Student';
 
 class StudentController {
+  async index(req, res) {
+    const students = await Student.findAll();
+
+    if (!students.length) {
+      return res.status(204).json();
+    }
+
+    return res.json(students);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -24,9 +34,11 @@ class StudentController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    const student = await Student.findOne({ where: { email: req.body.email } });
+    const studentExists = await Student.findOne({
+      where: { email: req.body.email },
+    });
 
-    if (student) {
+    if (studentExists) {
       return res.status(400).json({ error: 'Student already exists.' });
     }
 
@@ -61,13 +73,25 @@ class StudentController {
 
     const { id } = req.params;
 
-    const student = await Student.findOne({ where: { id } });
+    const studentExists = await Student.findOne({ where: { id } });
 
-    if (!student) {
+    if (!studentExists) {
       return res.status(404).json({ error: 'Student not found.' });
     }
 
-    const { name, email, age, weight, height } = await student.update(req.body);
+    if (req.body.email && req.body.email !== studentExists.email) {
+      const studentEmailExists = await Student.findOne({
+        where: { email: req.body.email },
+      });
+
+      if (studentEmailExists) {
+        return res.status(400).json({ error: 'Student already exists.' });
+      }
+    }
+
+    const { name, email, age, weight, height } = await studentExists.update(
+      req.body
+    );
 
     return res.json({
       id,
