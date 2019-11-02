@@ -80,7 +80,60 @@ class RegistrationController {
   }
 
   async update(req, res) {
-    return res.json();
+    const schema = Yup.object().shape({
+      plan_id: Yup.number(),
+      start_date: Yup.date(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails.' });
+    }
+
+    const { id } = req.params;
+    const { plan_id, start_date } = req.body;
+
+    const registrationExists = await Registration.findByPk(id);
+
+    if (!registrationExists) {
+      return res.status(400).json({ error: 'Registration not found.' });
+    }
+
+    const planExists = await Plan.findOne({ where: { id: plan_id } });
+
+    if (!planExists) {
+      return res.status(404).json({ error: 'Plan not found.' });
+    }
+
+    // const studentExists = await Student.findOne({ where: { id: student_id } });
+    // if (!studentExists) {
+    //   return res.status(404).json({ error: 'Student not found.' });
+    // }
+
+    const { duration, price } = planExists;
+
+    const end_date = format(
+      addDays(parseISO(start_date), duration * 30),
+      'yyyy-MM-dd'
+    );
+
+
+    const { active } = await registrationExists.update({
+      plan_id,
+      start_date,
+      end_date,
+      price: price * duration,
+    });
+
+    console.log('.......................');
+    console.log(id, plan_id, start_date, duration, price, end_date, active);
+
+    return res.json({
+      plan_id,
+      start_date: format(parseISO(start_date), duration * 30),
+      end_date,
+      active,
+      price: price * duration,
+    });
   }
 
   async delete(req, res) {
