@@ -1,8 +1,11 @@
 import * as Yup from 'yup';
 import { parseISO, addDays, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
 import Registration from '../models/Registration';
+
+import Mail from '../../lib/Mail';
 
 class RegistrationController {
   async index(req, res) {
@@ -55,7 +58,9 @@ class RegistrationController {
       return res.status(400).json({ error: 'Plan not found.' });
     }
 
-    const studentExists = await Student.findOne({ where: { id: student_id } });
+    const studentExists = await Student.findOne({
+      where: { id: student_id },
+    });
 
     if (!studentExists) {
       return res.status(400).json({ error: 'Student not found.' });
@@ -74,6 +79,24 @@ class RegistrationController {
       start_date,
       end_date,
       price: price * duration,
+    });
+
+    await Mail.sendMail({
+      to: `${studentExists.name} <${studentExists.email}>`,
+      subject: 'Bem-vindo ao Gympoint',
+      // text: `Bem vindo ao Gympoint ${studentExists.name}`,
+      template: 'welcome',
+      context: {
+        student: studentExists.name,
+        plan_title: planExists.title,
+        plan_duration: planExists.duration,
+        start_date: format(parseISO(start_date), "dd'/'MM'/'yy", {
+          locale: pt,
+        }),
+        end_date: format(parseISO(end_date), "dd'/'MM'/'yy", {
+          locale: pt,
+        }),
+      },
     });
 
     return res.json(registration);
@@ -145,9 +168,6 @@ class RegistrationController {
       return res.status(404).json({ error: 'Registration not found.' });
     }
 
-    console.log('.......................');
-    console.log(id, registrationExists);
-
     try {
       await registrationExists.destroy({
         where: { id },
@@ -158,8 +178,6 @@ class RegistrationController {
     } catch (err) {
       return res.status(400).json({ error: 'Delete fails.' });
     }
-
-    return res.json();
   }
 }
 
