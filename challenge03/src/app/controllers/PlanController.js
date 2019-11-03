@@ -64,7 +64,6 @@ class PlanController {
 
   async delete(req, res) {
     const { id } = req.params;
-    console.log(id);
 
     if (!id) {
       return res.status(400).json({ error: 'Invalid ID.' });
@@ -83,7 +82,7 @@ class PlanController {
         where: { id },
       });
 
-      return res.status(200).json({ success: 'Plan deleted with sucess.' });
+      return res.status(200).json({ success: 'Plan deleted with success.' });
     } catch (err) {
       return res.status(400).json({ error: 'Delete fails.' });
     }
