@@ -95,7 +95,7 @@ class RegistrationController {
     const registrationExists = await Registration.findByPk(id);
 
     if (!registrationExists) {
-      return res.status(400).json({ error: 'Registration not found.' });
+      return res.status(404).json({ error: 'Registration not found.' });
     }
 
     const planExists = await Plan.findOne({ where: { id: plan_id } });
@@ -116,16 +116,12 @@ class RegistrationController {
       'yyyy-MM-dd'
     );
 
-
     const { active } = await registrationExists.update({
       plan_id,
       start_date,
       end_date,
       price: price * duration,
     });
-
-    console.log('.......................');
-    console.log(id, plan_id, start_date, duration, price, end_date, active);
 
     return res.json({
       plan_id,
@@ -137,6 +133,32 @@ class RegistrationController {
   }
 
   async delete(req, res) {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: 'Invalid ID.' });
+    }
+
+    const registrationExists = await Registration.findByPk(id);
+
+    if (!registrationExists) {
+      return res.status(404).json({ error: 'Registration not found.' });
+    }
+
+    console.log('.......................');
+    console.log(id, registrationExists);
+
+    try {
+      await registrationExists.destroy({
+        where: { id },
+      });
+      return res
+        .status(400)
+        .json({ success: 'Registration deleted with success.' });
+    } catch (err) {
+      return res.status(400).json({ error: 'Delete fails.' });
+    }
+
     return res.json();
   }
 }
