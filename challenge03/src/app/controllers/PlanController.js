@@ -82,7 +82,7 @@ class PlanController {
         where: { id },
       });
 
-      return res.status(200).json({ success: 'Plan deleted with sucess.' });
+      return res.status(200).json({ success: 'Plan deleted with success.' });
     } catch (err) {
       return res.status(400).json({ error: 'Delete fails.' });
     }
