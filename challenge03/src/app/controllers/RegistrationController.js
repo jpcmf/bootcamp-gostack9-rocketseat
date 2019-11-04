@@ -5,7 +5,8 @@ import Plan from '../models/Plan';
 import Student from '../models/Student';
 import Registration from '../models/Registration';
 
-import Mail from '../../lib/Mail';
+import WelcomeMail from '../jobs/WelcomeMail';
+import Queue from '../../lib/Queue';
 
 class RegistrationController {
   async index(req, res) {
@@ -81,22 +82,11 @@ class RegistrationController {
       price: price * duration,
     });
 
-    await Mail.sendMail({
-      to: `${studentExists.name} <${studentExists.email}>`,
-      subject: 'Bem-vindo ao Gympoint',
-      // text: `Bem vindo ao Gympoint ${studentExists.name}`,
-      template: 'welcome',
-      context: {
-        student: studentExists.name,
-        plan_title: planExists.title,
-        plan_duration: planExists.duration,
-        start_date: format(parseISO(start_date), "dd'/'MM'/'yy", {
-          locale: pt,
-        }),
-        end_date: format(parseISO(end_date), "dd'/'MM'/'yy", {
-          locale: pt,
-        }),
-      },
+    await Queue.add(WelcomeMail.key, {
+      studentExists,
+      planExists,
+      start_date,
+      end_date,
     });
 
     return res.json(registration);
