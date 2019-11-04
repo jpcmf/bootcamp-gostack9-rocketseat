@@ -10,7 +10,7 @@ class WelcomeMail {
   async handle({ data }) {
     const { studentExists, planExists, start_date, end_date } = data;
 
-    console.log('A fila andou...');
+    // console.log('A fila andou...');
 
     await Mail.sendMail({
       to: `${studentExists.name} <${studentExists.email}>`,

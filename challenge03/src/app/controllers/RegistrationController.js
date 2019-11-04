@@ -49,8 +49,18 @@ class RegistrationController {
 
     if (!plan_id || !student_id) {
       return res
-        .status(400)
+        .status(401)
         .json({ error: 'Plan ID or Student ID is invalid.' });
+    }
+
+    const registrationExists = await Registration.findOne({
+      where: { student_id },
+    });
+
+    if (registrationExists) {
+      return res
+        .status(401)
+        .json({ error: 'A registration with this student already exists' });
     }
 
     const planExists = await Plan.findOne({ where: { id: plan_id } });
