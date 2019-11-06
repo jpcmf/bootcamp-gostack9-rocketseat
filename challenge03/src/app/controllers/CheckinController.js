@@ -6,7 +6,18 @@ import Student from '../models/Student';
 
 class CheckinController {
   async index(req, res) {
-    return res.json();
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: 'Invalid ID.' });
+    }
+
+    const checkins = await Checkin.findAll({ where: { student_id: id } });
+
+    console.log('....');
+    console.log(id, checkins);
+
+    return res.json(checkins);
   }
 
   async store(req, res) {
@@ -35,9 +46,6 @@ class CheckinController {
         },
       },
     });
-
-    console.log('....');
-    console.log(id, searchDate, checkins);
 
     if (checkins.length >= 5) {
       return res.status(400).json({
