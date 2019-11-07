@@ -14,9 +14,6 @@ class CheckinController {
 
     const checkins = await Checkin.findAll({ where: { student_id: id } });
 
-    console.log('....');
-    console.log(id, checkins);
-
     return res.json(checkins);
   }
 
