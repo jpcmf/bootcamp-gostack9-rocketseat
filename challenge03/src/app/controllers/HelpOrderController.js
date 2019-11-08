@@ -1,5 +1,7 @@
+import Queue from '../../lib/Queue';
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
+import HelpOrderMail from '../jobs/HelpOrderMail';
 
 class HelpOrderController {
   async index(req, res) {
@@ -49,12 +51,6 @@ class HelpOrderController {
       return res.status(400).json({ error: 'Invalid ID.' });
     }
 
-    const studentExists = await Student.findByPk(id);
-
-    if (!studentExists) {
-      return res.status(400).json({ error: 'Student not found.' });
-    }
-
     const helpOrders = await HelpOrder.findByPk(Number(id), {
       include: [
         {
@@ -72,6 +68,10 @@ class HelpOrderController {
     helpOrders.answer_at = new Date();
 
     const helpOrder = await helpOrders.update(req.body);
+
+    await Queue.add(HelpOrderMail.key, {
+      helpOrder,
+    });
 
     const { answer, answer_at } = helpOrder;
 
