@@ -15,14 +15,19 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 
+routes.post('/students/:id/checkins', CheckinController.store);
+routes.get('/students/:id/checkins', CheckinController.index);
+
+routes.post('/students/:id/help-orders', HelpOrderController.store);
+routes.get('/students/:id/help-orders', HelpOrderController.index);
+
 routes.use(authMiddleware);
+routes.use(adminMiddleware);
 
 routes.post('/plans', PlanController.store);
 routes.get('/plans', PlanController.index);
 routes.put('/plans/:id', PlanController.update);
 routes.delete('/plans/:id', PlanController.delete);
-
-routes.use(adminMiddleware);
 
 routes.post('/users', UserController.store);
 routes.get('/users', UserController.index);
@@ -37,11 +42,6 @@ routes.get('/registrations', RegistrationController.index);
 routes.put('/registrations/:id', RegistrationController.update);
 routes.delete('/registrations/:id', RegistrationController.delete);
 
-routes.post('/students/:id/checkins', CheckinController.store);
-routes.get('/students/:id/checkins', CheckinController.index);
-
-routes.post('/students/:id/help-orders', HelpOrderController.store);
-routes.get('/students/:id/help-orders', HelpOrderController.index);
 routes.put('/help-orders/:id/answer', HelpOrderController.update);
 routes.get('/help-orders', HelpOrderController.show);
 

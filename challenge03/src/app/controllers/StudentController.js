@@ -46,7 +46,7 @@ class StudentController {
       req.body
     );
 
-    return res.status(201).json({
+    return res.json({
       id,
       name,
       email,
