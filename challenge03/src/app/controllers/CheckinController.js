@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import { startOfDay, subDays, endOfDay } from 'date-fns';
+import { startOfWeek, endOfWeek } from 'date-fns';
 
 import Checkin from '../models/Checkin';
 import Student from '../models/Student';
@@ -36,10 +36,7 @@ class CheckinController {
       where: {
         student_id: id,
         created_at: {
-          [Op.between]: [
-            startOfDay(subDays(searchDate, 7)),
-            endOfDay(searchDate),
-          ],
+          [Op.between]: [startOfWeek(searchDate), endOfWeek(searchDate)],
         },
       },
     });
