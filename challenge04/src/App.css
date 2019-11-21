@@ -29,8 +29,8 @@ header nav {
   font-size: 14px;
   height: 64px;
   justify-content: space-between;
-  min-width: 980px;
   padding: 0 42px;
+  width: 100%;
 }
 
 nav span {
@@ -51,7 +51,7 @@ nav > div > svg {
 
 .postlist {
   margin: 0 auto 20px;
-  width: 700px;
+  max-width: 700px;
 }
 
 .post {

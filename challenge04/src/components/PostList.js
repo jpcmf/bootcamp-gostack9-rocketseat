@@ -33,7 +33,7 @@ class PostList extends Component {
         ]
       },
       {
-        id: 1,
+        id: 2,
         author: {
           name: "João Paulo Fricks",
           avatar: "https://api.adorable.io/avatars/40/user3.png"
@@ -64,9 +64,7 @@ class PostList extends Component {
 
   render() {
     const { posts } = this.state;
-    console.log(posts);
-    
-    
+
     return (
       <div className="postlist">
         {posts.map(post => <Post key={post.id} data={post} />)}
