@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Loading = styled.div`
   align-items: center;
@@ -105,6 +105,25 @@ export const IssueList = styled.ul`
         font-size: 12px;
         margin-top: 5px;
       }
+    }
+  }
+`;
+
+export const IssueFilter = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+
+  button {
+    border-radius: 4px;
+    outline: 0;
+    border: 0;
+    padding: 8px;
+    margin: 0 10px;
+
+    &:nth-child(${props => props.active + 1}) {
+      background-color: #576574;
+      color: #fff;
     }
   }
 `;
