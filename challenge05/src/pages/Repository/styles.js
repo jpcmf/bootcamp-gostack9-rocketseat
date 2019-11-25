@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Loading = styled.div`
   align-items: center;
@@ -116,14 +116,40 @@ export const IssueFilter = styled.div`
 
   button {
     border-radius: 4px;
-    outline: 0;
     border: 0;
-    padding: 8px;
     margin: 0 10px;
+    outline: 0;
+    padding: 8px;
 
     &:nth-child(${props => props.active + 1}) {
       background-color: #576574;
       color: #fff;
+    }
+  }
+`;
+
+export const PageActions = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  padding-top: 15px;
+
+  button {
+    border-radius: 4px;
+    border: solid 1px #576574;
+    color: #576574;
+    outline: 0;
+    padding: 8px;
+    transition: opacity 0.25s ease-in-out;
+
+    &:hover {
+      opacity: 0.35;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.35;
     }
   }
 `;
