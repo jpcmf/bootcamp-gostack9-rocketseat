@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { FaPlus, FaGithubAlt, FaSpinner } from 'react-icons/fa';
 
+import { toast } from 'react-toastify';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
@@ -64,12 +65,22 @@ export default class Main extends Component {
         repositories: [...repositories, data],
         newRepo: '',
       });
+
+      this.handleSucc();
     } catch (error) {
-      console.log(error);
       this.setState({ valid: true });
+      this.handleWarn();
     } finally {
       this.setState({ loading: false });
     }
+  };
+
+  handleSucc = () => {
+    toast.success('Repositório adicionado com sucesso!');
+  };
+
+  handleWarn = () => {
+    toast.warn('Mensagem warn');
   };
 
   render() {
