@@ -1,0 +1,110 @@
+import styled from 'styled-components';
+
+export const Loading = styled.div`
+  align-items: center;
+  color: #fff;
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+  height: 100vh;
+  justify-content: center;
+`;
+
+export const Owner = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: #7159c1;
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+    svg {
+      margin-right: 5px;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+    width: 120px;
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+
+  p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 5px;
+    max-width: 400px;
+    text-align: center;
+  }
+`;
+
+export const IssueList = styled.ul`
+  border-top: solid 1px #eee;
+  list-style: none;
+  margin-top: 30px;
+  padding-top: 30px;
+
+  li {
+    align-items: center;
+    border: solid 1px #eee;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 10px;
+
+    & + li {
+      margin-top: 10px;
+    }
+
+    img {
+      border: solid 2px #eee;
+      border-radius: 50%;
+      max-width: 36px;
+    }
+
+    div {
+      flex: 1;
+      margin-left: 15px;
+
+      strong {
+        font-size: 16px;
+
+        a {
+          color: #333;
+          text-decoration: none;
+          transition: all ease 300ms;
+
+          &:hover {
+            color: #7159c1;
+          }
+        }
+
+        span {
+          background-color: #eee;
+          border-radius: 2px;
+          color: #333;
+          font-size: 12px;
+          font-weight: 600;
+          height: 20px;
+          margin-left: 10px;
+          padding: 3px 4px;
+        }
+      }
+
+      p {
+        color: #999;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+    }
+  }
+`;
