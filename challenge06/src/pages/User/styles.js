@@ -75,3 +75,7 @@ export const Author = styled.Text`
   font-size: 13px;
   margin-top: 2px;
 `;
+
+export const ActivityIndicatorWrapper = styled.View`
+  margin-top: 20px;
+`;
