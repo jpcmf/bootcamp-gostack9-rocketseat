@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { PropTypes } from 'prop-types';
 import api from '../../services/api';
 
@@ -53,6 +53,7 @@ export default class User extends Component {
     const { page } = this.state;
     const pageNumber = page + 1;
     this.loadStarred(pageNumber);
+    console.tron.log(pageNumber);
   };
 
   refreshList = () => {
@@ -67,6 +68,7 @@ export default class User extends Component {
   };
 
   handleNavigate = repository => {
+    // console.tron.log(repository);
     const { navigation } = this.props;
     navigation.navigate('Repository', { repository });
   };
@@ -97,13 +99,15 @@ export default class User extends Component {
             onEndReached={this.loadMore}
             keyExtractor={star => String(star.id)}
             renderItem={({ item }) => (
-              <Starred>
-                <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
-                <Info>
-                  <Title>{item.name}</Title>
-                  <Author>{item.owner.login}</Author>
-                </Info>
-              </Starred>
+              <TouchableOpacity onPress={() => this.handleNavigate(item)}>
+                <Starred>
+                  <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
+                  <Info>
+                    <Title>{item.name}</Title>
+                    <Author>{item.owner.login}</Author>
+                  </Info>
+                </Starred>
+              </TouchableOpacity>
             )}
           />
         )}
