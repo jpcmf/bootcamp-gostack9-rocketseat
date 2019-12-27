@@ -4,13 +4,13 @@ import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
-    const name = req.query.name || '';
+    const { q: query = '' } = req.query;
 
     const students = await Student.findAll({
       order: ['name'],
       where: {
         name: {
-          [Op.iLike]: `%${name}`,
+          [Op.iLike]: `%${query}`,
         },
       },
     });
