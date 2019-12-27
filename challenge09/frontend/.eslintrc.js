@@ -35,6 +35,7 @@ module.exports = {
       }
     ],
     'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
