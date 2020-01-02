@@ -63,6 +63,15 @@ export const Content = styled.div`
           color: #999999;
         }
       }
+
+      span {
+        animation: 300ms ease-out 0s 1 slideInFromLeft;
+        color: ${darken(0.03, '#ee4d64')};
+        align-self: flex-start;
+        margin-top: 5px;
+        font-size: 11px;
+        font-weight: bold;
+      }
     }
 
     button {
