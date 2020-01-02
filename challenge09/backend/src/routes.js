@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import multer from 'multer';
+import multerConfig from './config/multer';
 
 import UserController from './app/controllers/UserController';
 import PlanController from './app/controllers/PlanController';
@@ -12,6 +14,7 @@ import authMiddleware from './app/middlewares/auth';
 import adminMiddleware from './app/middlewares/admin';
 
 const routes = new Router();
+const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
 
@@ -32,6 +35,10 @@ routes.delete('/plans/:id', PlanController.delete);
 routes.post('/users', UserController.store);
 routes.get('/users', UserController.index);
 routes.put('/users', UserController.update);
+
+routes.post('/files', upload.single('file'), (req, res) => {
+  return res.json({ ok: true });
+});
 
 routes.post('/students', StudentController.store);
 routes.get('/students', StudentController.index);
