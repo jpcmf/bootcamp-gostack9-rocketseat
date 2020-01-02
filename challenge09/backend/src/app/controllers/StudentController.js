@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 import Student from '../models/Student';
+import File from '../models/File';
 
 class StudentController {
   async index(req, res) {
@@ -13,6 +14,13 @@ class StudentController {
           [Op.iLike]: `%${query}`,
         },
       },
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
     });
 
     if (!students.length) {

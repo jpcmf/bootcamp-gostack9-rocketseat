@@ -1,9 +1,20 @@
 import * as Yup from 'yup';
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
   async index(req, res) {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      where: { permission_level: 'admin' },
+      attributes: ['id', 'name', 'email', 'avatar_id'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
     return res.json(users);
   }
 
@@ -80,9 +91,27 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match.' });
     }
 
-    const { id, name, permission_level, provider } = await user.update(
-      req.body
-    );
+    // const { id, name, permission_level, provider } = await user.update(
+    //   req.body
+    // );
+
+    await user.update(req.body);
+
+    const {
+      id,
+      name,
+      permission_level,
+      provider,
+      avatar,
+    } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     return res.json({
       id,
@@ -90,6 +119,7 @@ class UserController {
       email,
       permission_level,
       provider,
+      avatar,
     });
   }
 }
