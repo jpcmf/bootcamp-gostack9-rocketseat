@@ -4,6 +4,8 @@ import { Form, Input } from '@rocketseat/unform';
 
 import { MdCheck } from 'react-icons/md';
 
+import AvatarInput from './AvatarInput';
+
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import { Wrapper, Container, Header } from './styles';
@@ -29,6 +31,7 @@ export default function Profile() {
       </Header>
       <Container>
         <Form id="my-form" initialData={profile} onSubmit={handleSubmit}>
+          <AvatarInput name="avatar_id" />
           <input type="hidden" value="prayer" />
           <div className="form__group">
             <label htmlFor="name">Nome completo</label>
