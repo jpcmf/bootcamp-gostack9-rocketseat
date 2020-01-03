@@ -1,0 +1,96 @@
+import styled from 'styled-components';
+import { darken } from 'polished';
+
+export const Wrapper = styled.div`
+  margin: 30px auto;
+  max-width: 1200px;
+`;
+
+export const Header = styled.div`
+  align-items: center;
+  display: flex;
+  margin-bottom: 25px;
+  justify-content: space-between;
+
+  h2 {
+    color: #444;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .actions {
+    button {
+      background-color: #ee4d64;
+      border-radius: 4px;
+      border: 0;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      height: 36px;
+      padding: 0 16px;
+      transition: background-color 300ms ease;
+
+      &:hover {
+        background-color: ${darken(0.03, '#ee4d64')};
+      }
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+`;
+
+export const Container = styled.div`
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 30px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .form__group {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      label {
+        color: #444444;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      input {
+        border-radius: 4px;
+        border: solid 1px #ddd;
+        font-size: 16px;
+        height: 45px;
+        padding: 0 15px;
+        width: 100%;
+
+        &::placeholder {
+          color: #999999;
+        }
+      }
+
+      span {
+        animation: 300ms ease-out 0s 1 slideInFromLeft;
+        color: ${darken(0.03, '#ee4d64')};
+        align-self: flex-start;
+        margin-top: 5px;
+        font-size: 11px;
+        font-weight: bold;
+      }
+    }
+
+    hr {
+      margin-bottom: 20px;
+    }
+  }
+`;

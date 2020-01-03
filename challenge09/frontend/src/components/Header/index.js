@@ -22,10 +22,12 @@ export default function Header() {
               <strong>João Paulo Fricks</strong>
               <Link to="/logout">sair do sistema</Link>
             </div>
-            <img
-              src="https://api.adorable.io/avatars/40/abott@adorable.png"
-              alt="João Paulo Fricks"
-            />
+            <Link to="/profile">
+              <img
+                src="https://api.adorable.io/avatars/40/abott@adorable.png"
+                alt="João Paulo Fricks"
+              />
+            </Link>
           </Profile>
         </aside>
       </Content>
