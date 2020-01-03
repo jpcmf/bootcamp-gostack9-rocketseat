@@ -1,4 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -18,7 +19,7 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
 
     if (!user.permission_level === 'admin') {
-      console.tron.error('Usuário não tem nível de administrador.');
+      toast.error('Usuário não tem nível de administrador.');
 
       return;
     }
@@ -27,6 +28,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (error) {
+    toast.error('Falha ao tentar fazer o login. Verifique seus dados.');
     yield put(signFailure());
   }
 }
