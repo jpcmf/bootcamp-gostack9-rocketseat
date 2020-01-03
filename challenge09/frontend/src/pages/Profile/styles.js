@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 
 export const Wrapper = styled.div`
   margin: 30px auto;
@@ -90,7 +90,10 @@ export const Container = styled.div`
     }
 
     hr {
-      margin-bottom: 20px;
+      border: 0;
+      height: 1px;
+      background-color: ${lighten(0.09, '#ddd')};
+      margin: 20px 0 30px;
     }
   }
 `;
