@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
+import * as Yup from 'yup';
+
 import { MdCheck } from 'react-icons/md';
 
 import AvatarInput from './AvatarInput';
@@ -9,6 +11,25 @@ import AvatarInput from './AvatarInput';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import { Wrapper, Container, Header } from './styles';
+
+Yup.setLocale({
+  string: {
+    min: 'Senha deve conter no mínimo ${min} caracteres.',
+  },
+});
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Insira um e-mail válido.')
+    .required('O e-mail é obrigatório.'),
+  oldPassword: Yup.string()
+    .required('A senha atual é obrigatória.')
+    .min(6),
+  password: Yup.string().required('A nova senha é obrigatória.'),
+  confirmPassword: Yup.string()
+    .required('É obrigatório confirmar a nova senha.')
+    .oneOf([Yup.ref('password'), null], 'Senhas não conferem.'),
+});
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -30,7 +51,12 @@ export default function Profile() {
         </div>
       </Header>
       <Container>
-        <Form id="my-form" initialData={profile} onSubmit={handleSubmit}>
+        <Form
+          id="my-form"
+          schema={schema}
+          initialData={profile}
+          onSubmit={handleSubmit}
+        >
           <AvatarInput name="avatar_id" />
           <input type="hidden" value="prayer" />
           <div className="form__group">

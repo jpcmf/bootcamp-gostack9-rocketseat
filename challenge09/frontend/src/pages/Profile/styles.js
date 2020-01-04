@@ -42,6 +42,17 @@ export const Header = styled.div`
 `;
 
 export const Container = styled.div`
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-10%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
   background-color: #fff;
   border-radius: 4px;
   padding: 30px;
