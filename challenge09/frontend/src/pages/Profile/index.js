@@ -14,6 +14,7 @@ import { Wrapper, Container, Header } from './styles';
 
 Yup.setLocale({
   string: {
+    // eslint-disable-next-line
     min: 'Senha deve conter no mínimo ${min} caracteres.',
   },
 });
