@@ -11,6 +11,7 @@ import {
 export function* updateProfile({ payload }) {
   try {
     const { name, email, avatar_id, ...rest } = payload.data;
+    // console.log(...rest);
 
     const profile = {
       name,
@@ -25,7 +26,13 @@ export function* updateProfile({ payload }) {
 
     yield put(updateProfileSuccess(response.data));
   } catch (error) {
-    toast.error('Erro ao atualizar perfil. Confira seus dados.');
+    if (error.response.status === 400) {
+      toast.error('Erro ao atualizar perfil. Confira seus dados.');
+    }
+
+    if (error.response.status === 401) {
+      toast.error('Usuário não tem nível de administrador.');
+    }
     yield put(updateProfileFailure());
   }
 }
