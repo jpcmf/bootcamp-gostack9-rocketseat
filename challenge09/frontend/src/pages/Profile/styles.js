@@ -20,10 +20,12 @@ export const Header = styled.div`
 
   .actions {
     button {
+      align-items: center;
       background-color: #ee4d64;
       border-radius: 4px;
       border: 0;
       color: #fff;
+      display: flex;
       font-size: 14px;
       font-weight: bold;
       height: 36px;
