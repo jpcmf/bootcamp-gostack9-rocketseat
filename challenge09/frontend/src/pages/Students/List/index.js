@@ -7,7 +7,8 @@ import { MdAdd, MdSearch } from 'react-icons/md';
 import api from '~/services/api';
 
 import { Wrapper, Header, Container, Table } from './styles';
-import LoadingLine from '../../../components/LoadingLine';
+import LoadingLine from '~/components/LoadingLine';
+import EmptyWrapper from '~/components/EmptyWrapper';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,6 @@ export default function Dashboard() {
         params: {},
       });
 
-      console.log(response.data);
       setStudents(response.data);
       setLoading(false);
     }
@@ -98,6 +98,15 @@ export default function Dashboard() {
                     </td>
                   </tr>
                 ))
+              )}
+              {!students.length && !loading && (
+                <tr>
+                  <td colSpan="3">
+                    <EmptyWrapper>
+                      <strong>Não há alunos cadastrados.</strong>
+                    </EmptyWrapper>
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
