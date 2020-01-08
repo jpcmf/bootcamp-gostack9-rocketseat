@@ -42,6 +42,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/students', StudentController.store);
 routes.get('/students', StudentController.index);
 routes.put('/students/:id', StudentController.update);
+routes.delete('/students/:id', StudentController.delete);
 
 routes.post('/register', RegistrationController.store);
 routes.get('/registrations', RegistrationController.index);

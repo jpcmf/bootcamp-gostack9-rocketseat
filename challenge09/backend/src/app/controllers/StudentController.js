@@ -120,6 +120,32 @@ class StudentController {
       height,
     });
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: 'Invalid ID.' });
+    }
+
+    const student = await Student.findOne({
+      where: { id },
+    });
+
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found.' });
+    }
+
+    try {
+      await student.destroy({
+        where: { id },
+      });
+
+      return res.status(400).json({ success: 'Student deleted with success.' });
+    } catch (err) {
+      return res.status(400).json({ error: 'Delete fails.' });
+    }
+  }
 }
 
 export default new StudentController();
