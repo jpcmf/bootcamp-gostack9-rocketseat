@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Shimmer from 'react-shimmer-effect';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import api from '~/services/api';
 
 import { Wrapper, Header, Container, Table } from './styles';
+import LoadingLine from '../../../components/LoadingLine';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -55,25 +57,48 @@ export default function Dashboard() {
                 <th>NOME</th>
                 <th>E-MAIL</th>
                 <th>IDADE</th>
-                <th />
+                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
-              {students.map(student => (
-                <tr key={student.id}>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
-                  <td>{student.age}</td>
+              {loading ? (
+                <tr>
                   <td>
-                    <div className="actions">
-                      <Link to={`/students/${student.id}`}>editar</Link>
-                      <a href="/" onClick={() => handleDeleteStudent(student)}>
-                        excluir
-                      </a>
-                    </div>
+                    <Shimmer>
+                      <LoadingLine />
+                    </Shimmer>
+                  </td>
+                  <td>
+                    <Shimmer>
+                      <LoadingLine />
+                    </Shimmer>
+                  </td>
+                  <td>
+                    <Shimmer>
+                      <LoadingLine />
+                    </Shimmer>
                   </td>
                 </tr>
-              ))}
+              ) : (
+                students.map(student => (
+                  <tr key={student.id}>
+                    <td>{student.name}</td>
+                    <td>{student.email}</td>
+                    <td>{student.age}</td>
+                    <td>
+                      <div className="actions">
+                        <Link to={`/students/${student.id}`}>editar</Link>
+                        <a
+                          href="/"
+                          onClick={() => handleDeleteStudent(student)}
+                        >
+                          excluir
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </Table>
