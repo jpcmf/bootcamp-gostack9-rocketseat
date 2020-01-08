@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Shimmer from 'react-shimmer-effect';
-
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { MdAdd, MdSearch } from 'react-icons/md';
-
-import api from '~/services/api';
 
 import { Wrapper, Header, Container, Table } from './styles';
 import LoadingLine from '~/components/LoadingLine';
 import EmptyWrapper from '~/components/EmptyWrapper';
+import ConfirmAlert from '~/components/ConfirmAlert';
+
+import api from '~/services/api';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
@@ -16,13 +19,17 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadStudents() {
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      const response = await api.get('students', {
-        params: {},
-      });
+        const response = await api.get('students', {
+          params: {},
+        });
+        setStudents(response.data);
+      } catch (error) {
+        toast.error('Não foi possível carregar os alunos.');
+      }
 
-      setStudents(response.data);
       setLoading(false);
     }
     loadStudents();
@@ -32,7 +39,37 @@ export default function Dashboard() {
     document.title = 'Gympoint - Alunos';
   }, []);
 
-  async function handleDeleteStudent(student) {}
+  async function handleDeleteStudent(student) {
+    async function deleteStudent() {
+      try {
+        await api.delete(`/students/${student.id}`);
+        toast.success('Aluno deletado com sucesso.');
+
+        setStudents(
+          students.filter(currentStudent => currentStudent.id !== student.id)
+        );
+      } catch (error) {
+        toast.error('Não foi possível excluir o aluno.');
+      }
+    }
+
+    confirmAlert({
+      customUI: ({ onClose }) => ( // eslint-disable-line
+        <ConfirmAlert
+          callback={deleteStudent}
+          onClose={onClose}
+          title="Tem certeza que deseja excluir o aluno?"
+          message={
+            <p>
+              Ao confirmar que o aluno <strong>{student.name}</strong> será
+              excluído não será possível reverter. Tem certeza que deseja
+              excluir?
+            </p>
+          }
+        />
+      ),
+    });
+  }
 
   return (
     <Wrapper>
@@ -88,12 +125,12 @@ export default function Dashboard() {
                     <td>
                       <div className="actions">
                         <Link to={`/students/${student.id}`}>editar</Link>
-                        <a
-                          href="/"
+                        <button
+                          type="button"
                           onClick={() => handleDeleteStudent(student)}
                         >
                           excluir
-                        </a>
+                        </button>
                       </div>
                     </td>
                   </tr>
