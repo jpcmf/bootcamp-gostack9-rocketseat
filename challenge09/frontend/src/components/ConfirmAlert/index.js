@@ -4,7 +4,8 @@ import { MdCheck, MdClose } from 'react-icons/md';
 
 import { Card } from './styles';
 
-// import { Container } from './styles';
+import colors from '~/styles/colors';
+import Button from '~/components/Button';
 
 export default function ConfirmAlert({
   callback,
@@ -24,30 +25,31 @@ export default function ConfirmAlert({
       {showButtons && (
         <div>
           {!onlyConfirmButton && (
-            <button
+            <Button
               type="button"
               onClick={onClose}
-              // icon={MdClose}
-              // text={cancelButtonText}
+              icon={MdClose}
+              text={cancelButtonText}
+              color={colors.darkGrey}
             >
               <MdClose />
               NÃO
-            </button>
+            </Button>
           )}
 
-          <button
+          <Button
             type="button"
             onClick={() => {
               if (callback) callback();
 
               onClose();
             }}
-            // icon={MdCheck}
-            // text={confirmButtonText}
+            icon={MdCheck}
+            text={confirmButtonText}
           >
             <MdCheck />
             SIM
-          </button>
+          </Button>
         </div>
       )}
     </Card>
