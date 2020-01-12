@@ -18,6 +18,10 @@ export default function Dashboard() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
+    document.title = 'Gympoint - Alunos';
+  }, []);
+
+  useEffect(() => {
     async function loadStudents() {
       try {
         setLoading(true);
@@ -34,10 +38,6 @@ export default function Dashboard() {
       setLoading(false);
     }
     loadStudents();
-  }, []);
-
-  useEffect(() => {
-    document.title = 'Gympoint - Alunos';
   }, []);
 
   async function handleDeleteStudent(student) {
