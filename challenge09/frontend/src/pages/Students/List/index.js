@@ -25,6 +25,7 @@ export default function Dashboard() {
         const response = await api.get('students', {
           params: {},
         });
+
         setStudents(response.data);
       } catch (error) {
         toast.error('Não foi possível carregar os alunos.');
@@ -40,15 +41,15 @@ export default function Dashboard() {
   }, []);
 
   async function handleDeleteStudent(student) {
-    async function deleteStudent() {
+    function deleteStudent() {
       try {
-        await api.delete(`/students/${student.id}`);
+        api.delete(`/students/${student.id}`);
         toast.success('Aluno deletado com sucesso.');
 
         setStudents(
           students.filter(currentStudent => currentStudent.id !== student.id)
         );
-      } catch (error) {
+      } catch (err) {
         toast.error('Não foi possível excluir o aluno.');
       }
     }
