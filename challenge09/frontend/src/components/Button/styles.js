@@ -10,7 +10,7 @@ export const ButtonWrapper = styled.button`
   border: 0;
   color: ${colors.white};
   display: flex;
-  height: 45px;
+  height: 36px;
   transition: background-color 300ms ease;
 
   &:hover {
@@ -19,9 +19,8 @@ export const ButtonWrapper = styled.button`
 
   div {
     align-items: center;
-    /* background-color: rgba(0, 0, 0, 0.1); */
     display: flex;
-    padding: 12px;
+    padding: 0 8px 0 16px;
 
     svg {
       color: ${colors.white};
@@ -32,10 +31,9 @@ export const ButtonWrapper = styled.button`
   span {
     color: ${colors.white};
     flex: 1;
-    font-size: 16px;
     font-weight: bold;
     line-height: 19px;
-    margin: 0 12px;
+    margin: 0 16px 0 0;
     text-align: center;
   }
 `;
