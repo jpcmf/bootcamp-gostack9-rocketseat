@@ -7,13 +7,14 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
 import { Wrapper, Header, Container, Table } from './styles';
+
 import LoadingLine from '~/components/LoadingLine';
 import EmptyWrapper from '~/components/EmptyWrapper';
 import ConfirmAlert from '~/components/ConfirmAlert';
 
 import api from '~/services/api';
 
-export default function Dashboard() {
+export default function StudentsList() {
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
 

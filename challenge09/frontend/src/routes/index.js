@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import Route from './Route';
 
-import SignIn from '../pages/SignIn';
-import Profile from '../pages/Profile';
-import Dashboard from '../pages/Dashboard';
-import StudentsList from '../pages/Students/List';
-// import StudentsForm from '../pages/Students/Form';
+import SignIn from '~/pages/SignIn';
+import Profile from '~/pages/Profile';
+import Dashboard from '~/pages/Dashboard';
+import StudentsList from '~/pages/Students/List';
+import StudentsForm from '~/pages/Students/Form';
 
 export default function Routes() {
   return (
@@ -15,9 +15,9 @@ export default function Routes() {
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/dashboard" component={Dashboard} isPrivate />
 
-      <Route path="/students" component={StudentsList} isPrivate />
-      {/* <Route path="/students/:id" component={Students} isPrivate />
-      <Route path="/students/create" component={StudentsForm} isPrivate /> */}
+      <Route path="/students" component={StudentsList} isPrivate exact />
+      <Route path="/students/create" component={StudentsForm} isPrivate />
+      <Route path="/students/:id" component={StudentsForm} isPrivate />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>
