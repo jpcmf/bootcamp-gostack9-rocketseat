@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Shimmer from 'react-shimmer-effect';
 import { Link } from 'react-router-dom';
+import { Form } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
-import { Wrapper, Header, Container, Table } from './styles';
+import { Header, Table } from './styles';
 
+import Title from '~/components/Title';
+import Button from '~/components/Button';
+import Content from '~/components/Content';
+import TextInput from '~/components/TextInput';
+import Container from '~/components/Container';
 import LoadingLine from '~/components/LoadingLine';
 import EmptyWrapper from '~/components/EmptyWrapper';
 import ConfirmAlert from '~/components/ConfirmAlert';
@@ -73,22 +79,27 @@ export default function StudentsList() {
     });
   }
 
+  function handleSearchSubmit() {}
+
   return (
-    <Wrapper>
-      <Header>
+    <Container>
+      <Title>
         <h2>Gerenciando alunos</h2>
-        <div className="actions">
-          <button type="submit">
-            <MdAdd />
-            CADASTRAR
-          </button>
-          <label htmlFor="search">
+        <div>
+          <Link to="/students/create">
+            <Button icon={MdAdd} type="button" text="CADASTRAR" />
+          </Link>
+          <Form onSubmit={handleSearchSubmit}>
             <MdSearch />
-            <input type="text" placeholder="Buscar aluno" />
-          </label>
+            <TextInput
+              type="text"
+              name="search"
+              placeholder="Pesquisar por alunos"
+            />
+          </Form>
         </div>
-      </Header>
-      <Container>
+      </Title>
+      <Content>
         <Table>
           <table>
             <thead>
@@ -121,7 +132,19 @@ export default function StudentsList() {
               ) : (
                 students.map(student => (
                   <tr key={student.id}>
-                    <td>{student.name}</td>
+                    <td>
+                      <div className="avatar">
+                        <img
+                          src={
+                            student.avatar
+                              ? student.avatar.url
+                              : 'https://api.adorable.io/avatars/40/abott@adorable.png'
+                          }
+                          alt={student.name}
+                        />
+                        {student.name}
+                      </div>
+                    </td>
                     <td>{student.email}</td>
                     <td>{student.age}</td>
                     <td>
@@ -150,7 +173,7 @@ export default function StudentsList() {
             </tbody>
           </table>
         </Table>
-      </Container>
-    </Wrapper>
+      </Content>
+    </Container>
   );
 }

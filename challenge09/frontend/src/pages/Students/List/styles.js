@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-export const Wrapper = styled.div`
-  margin: 30px auto;
-  max-width: 1200px;
-`;
+import colors from '~/styles/colors';
 
 export const Header = styled.div`
   align-items: center;
@@ -23,7 +20,7 @@ export const Header = styled.div`
 
     button {
       align-items: center;
-      background-color: #ee4d64;
+      background-color: ${colors.primary};
       border-radius: 4px;
       border: 0;
       color: #fff;
@@ -64,7 +61,7 @@ export const Header = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Content = styled.div`
   background-color: #fff;
   border-radius: 4px;
   padding: 30px;
@@ -84,7 +81,7 @@ export const Table = styled.div`
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
+    vertical-align: middle;
   }
 
   table {
@@ -95,7 +92,7 @@ export const Table = styled.div`
     thead {
       tr {
         th {
-          color: #444444;
+          color: ${colors.dark};
           font-size: 16px;
           font-weight: bold;
           text-align: left;
@@ -112,10 +109,23 @@ export const Table = styled.div`
         }
 
         td {
-          border-bottom: solid 1px #eee;
+          border-bottom: solid 1px ${colors.lightGrey};
           padding: 17px 0;
 
-          .actions {
+          .avatar {
+            display: flex;
+            align-items: center;
+
+            img {
+              border: solid 1px ${colors.lightGrey};
+              border-radius: 50%;
+              margin-right: 16px;
+              height: 30px;
+              width: 30px;
+            }
+          }
+
+          /* .actions {
             a {
               color: #4d85ee;
 
@@ -132,7 +142,7 @@ export const Table = styled.div`
                 }
               }
             }
-          }
+          } */
         }
       }
     }

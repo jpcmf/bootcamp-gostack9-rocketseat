@@ -5,6 +5,7 @@ export default {
   darkGrey: '#999',
   grey: '#ddd',
   info: '#4d85ee',
+  lightGrey: '#eee',
   primary: '#ee4d64',
   secondary: '#f5f5f5',
   success: '#31DB7D',
