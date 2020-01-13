@@ -4,7 +4,12 @@ const Title = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  text-transform: uppercase;
+
+  h2 {
+    color: #444;
+    font-size: 24px;
+    line-height: 28px;
+  }
 
   div {
     align-items: center;
