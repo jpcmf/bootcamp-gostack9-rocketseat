@@ -15,7 +15,7 @@ export default function TextInput({
 }) {
   return (
     <TextInputWrapper className={className}>
-      {isTextArea ? (
+      {!isTextArea ? (
         <Input
           name={name}
           type={type}
