@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import colors from '~/styles/colors';
+
 const Title = styled.div`
   align-items: center;
   display: flex;
@@ -20,7 +22,23 @@ const Title = styled.div`
     }
 
     form {
+      display: flex;
       margin-left: 16px;
+      position: relative;
+
+      input {
+        padding-left: 30px;
+      }
+
+      svg {
+        fill: ${colors.darkGrey};
+        height: 16px;
+        left: 18px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        width: 16px;
+      }
     }
   }
 `;
