@@ -23,6 +23,7 @@ import api from '~/services/api';
 export default function StudentsList() {
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     document.title = 'Gympoint - Alunos';
@@ -34,7 +35,7 @@ export default function StudentsList() {
         setLoading(true);
 
         const response = await api.get('students', {
-          params: {},
+          params: { q: search },
         });
 
         setStudents(response.data);
@@ -45,7 +46,11 @@ export default function StudentsList() {
       setLoading(false);
     }
     loadStudents();
-  }, []);
+  }, [search]);
+
+  function handleSearchSubmit(data) {
+    setSearch(data.search);
+  }
 
   async function handleDeleteStudent(student) {
     function deleteStudent() {
@@ -78,8 +83,6 @@ export default function StudentsList() {
       ),
     });
   }
-
-  function handleSearchSubmit() {}
 
   return (
     <Container>
