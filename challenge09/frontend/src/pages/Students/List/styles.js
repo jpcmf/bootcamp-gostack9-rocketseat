@@ -125,24 +125,26 @@ export const Table = styled.div`
             }
           }
 
-          /* .actions {
+          .actions {
             a {
-              color: #4d85ee;
+              color: ${colors.info};
 
               &:hover {
-                color: ${darken(0.09, '#4d85ee')};
-              }
-
-              + a {
-                color: #de3b3b;
-                margin-left: 20px;
-
-                &:hover {
-                  color: ${darken(0.09, '#de3b3b')};
-                }
+                color: ${props => props && darken(0.09, colors.info)};
               }
             }
-          } */
+
+            button {
+              appearance: none;
+              border: 0;
+              color: ${colors.danger};
+              margin-left: 20px;
+
+              &:hover {
+                color: ${props => props && darken(0.09, colors.danger)};
+              }
+            }
+          }
         }
       }
     }

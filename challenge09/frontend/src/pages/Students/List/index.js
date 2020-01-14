@@ -7,7 +7,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { MdAdd, MdSearch } from 'react-icons/md';
 
-import { Header, Table } from './styles';
+import { Table } from './styles';
 
 import Title from '~/components/Title';
 import Button from '~/components/Button';
@@ -94,7 +94,7 @@ export default function StudentsList() {
             <TextInput
               type="text"
               name="search"
-              placeholder="Pesquisar por alunos"
+              placeholder="Buscar por aluno"
             />
           </Form>
         </div>
