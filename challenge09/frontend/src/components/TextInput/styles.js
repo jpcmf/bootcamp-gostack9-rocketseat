@@ -21,9 +21,9 @@ export const TextInputWrapper = styled.div`
   input,
   textarea {
     border-radius: 4px;
-    border: 2px solid ${colors.grey};
+    border: 1px solid ${colors.grey};
     color: ${colors.dark};
-    height: 45px;
+    height: 36px;
     padding: 0 15px;
     width: 100%;
 
