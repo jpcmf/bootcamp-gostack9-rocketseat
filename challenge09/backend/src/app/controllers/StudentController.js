@@ -11,7 +11,7 @@ class StudentController {
       order: ['name'],
       where: {
         name: {
-          [Op.iLike]: `%${query}`,
+          [Op.iLike]: `%${query}%`,
         },
       },
       include: [
@@ -22,10 +22,6 @@ class StudentController {
         },
       ],
     });
-
-    if (!students.length) {
-      return res.status(204).json();
-    }
 
     return res.json(students);
   }
