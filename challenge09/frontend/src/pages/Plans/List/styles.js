@@ -111,7 +111,16 @@ export const Table = styled.div`
 
         td {
           border-bottom: solid 1px ${colors.lightGrey};
+          font-size: 16px;
           padding: 17px 0;
+
+          &:last-child {
+            width: 15%;
+
+            @media (min-width: 1200px) {
+              width: 10%;
+            }
+          }
 
           .avatar {
             display: flex;
