@@ -34,6 +34,14 @@ class RegistrationController {
     return res.json(registrations);
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const registration = await Registration.findByPk(id);
+
+    return res.json(registration);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       student_id: Yup.number().required(),

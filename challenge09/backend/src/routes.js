@@ -48,6 +48,7 @@ routes.delete('/students/:id', StudentController.delete);
 
 routes.post('/registrations', RegistrationController.store);
 routes.get('/registrations', RegistrationController.index);
+routes.get('/registrations/:id', RegistrationController.show);
 routes.put('/registrations/:id', RegistrationController.update);
 routes.delete('/registrations/:id', RegistrationController.delete);
 
