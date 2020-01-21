@@ -5,6 +5,8 @@ import Route from './Route';
 import SignIn from '~/pages/SignIn';
 import Profile from '~/pages/Profile';
 import Dashboard from '~/pages/Dashboard';
+import PlansList from '~/pages/Plans/List';
+import PlansForm from '~/pages/Plans/Form';
 import StudentsList from '~/pages/Students/List';
 import StudentsForm from '~/pages/Students/Form';
 
@@ -18,6 +20,10 @@ export default function Routes() {
       <Route path="/students" component={StudentsList} isPrivate exact />
       <Route path="/students/create" component={StudentsForm} isPrivate />
       <Route path="/students/:id" component={StudentsForm} isPrivate />
+
+      <Route path="/plans" component={PlansList} isPrivate exact />
+      <Route path="/plans/create" component={PlansForm} isPrivate />
+      <Route path="/plans/:id" component={PlansForm} isPrivate />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>
