@@ -13,7 +13,6 @@ import { Table } from './styles';
 import Title from '~/components/Title';
 import Button from '~/components/Button';
 import Content from '~/components/Content';
-import TextInput from '~/components/TextInput';
 import Container from '~/components/Container';
 import LoadingLine from '~/components/LoadingLine';
 import EmptyWrapper from '~/components/EmptyWrapper';
