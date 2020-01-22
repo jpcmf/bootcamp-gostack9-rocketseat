@@ -21,7 +21,7 @@ export const CurrencyInputContainer = styled.div`
     margin-top: 8px;
     border: 1px solid ${colors.grey};
     border-radius: 4px;
-    height: 36px;
+    height: 45px;
     padding: 0 15px;
     color: ${colors.dark};
     width: 100%;
@@ -32,6 +32,10 @@ export const CurrencyInputContainer = styled.div`
       margin: 0 0 10px;
       font-size: 16px;
       line-height: 19px;
+    }
+
+    &:disabled {
+      background-color: #f5f5f5;
     }
   }
 

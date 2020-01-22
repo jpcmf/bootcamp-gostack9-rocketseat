@@ -23,7 +23,7 @@ export const TextInputWrapper = styled.div`
     border-radius: 4px;
     border: 1px solid ${colors.grey};
     color: ${colors.dark};
-    height: 36px;
+    height: 45px;
     padding: 0 15px;
     width: 100%;
 
@@ -46,5 +46,11 @@ export const TextInputWrapper = styled.div`
     color: ${colors.primary};
     font-weight: bold;
     margin-top: 8px;
+  }
+
+  &.search_input {
+    input {
+      height: 36px;
+    }
   }
 `;

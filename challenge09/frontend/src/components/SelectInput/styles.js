@@ -19,7 +19,7 @@ export const SelectInputWrapper = styled.div`
     border-radius: 4px;
     border: solid 1px ${colors.grey};
     color: ${colors.dark};
-    height: 36px;
+    height: 45px;
     padding: 0 15px;
     width: 100%;
 

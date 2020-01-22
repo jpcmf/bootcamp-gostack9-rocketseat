@@ -37,6 +37,10 @@ export const DatePicketInputWrapper = styled.div`
       line-height: 19px;
       margin: 0 0 10px;
     }
+
+    &:disabled {
+      background-color: #f5f5f5;
+    }
   }
 
   span {
