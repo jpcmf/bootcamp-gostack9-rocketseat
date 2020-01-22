@@ -124,8 +124,6 @@ export default function RegistrationsForm({ match }) {
 
         const { data: registration } = response;
 
-        console.log(registration.plan.title);
-
         const formattedTitle = `${registration.plan.title} - ${formatPrice(
           registration.plan.price
         )}/mês por ${formatDistanceStrict(
@@ -161,7 +159,7 @@ export default function RegistrationsForm({ match }) {
       } catch (error) {
         toast.error('Erro ao carregar dados da matrícula.');
 
-        // history.push('/registrations');
+        history.push('/registrations');
       } finally {
         setLoading(false);
       }

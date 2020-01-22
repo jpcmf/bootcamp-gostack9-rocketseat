@@ -23,6 +23,7 @@ export const TextInputWrapper = styled.div`
     border-radius: 4px;
     border: 1px solid ${colors.grey};
     color: ${colors.dark};
+    font-size: 16px;
     height: 45px;
     padding: 0 15px;
     width: 100%;

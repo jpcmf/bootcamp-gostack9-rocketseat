@@ -25,6 +25,7 @@ export const CurrencyInputContainer = styled.div`
     padding: 0 15px;
     color: ${colors.dark};
     width: 100%;
+    font-size: 16px;
 
     &::placeholder {
       color: ${colors.grey};
