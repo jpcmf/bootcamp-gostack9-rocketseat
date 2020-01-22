@@ -109,7 +109,7 @@ export default function PlansForm({ match }) {
     <Form initialData={initialData} schema={schema} onSubmit={handleSubmit}>
       <Container>
         <Title>
-          <h1>{id ? 'Editar plano' : 'Cadastrar plano'}</h1>
+          <h2>{id ? 'Editar plano' : 'Cadastrar plano'}</h2>
           <div>
             <Link to="/plans">
               <Button
