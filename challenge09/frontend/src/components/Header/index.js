@@ -23,7 +23,7 @@ export default function Header() {
           <img src={logo} alt="Gympoint" />
           <Link to="/students">ALUNOS</Link>
           <Link to="/plans">PLANOS</Link>
-          <Link to="/">MATRÍCULAS</Link>
+          <Link to="/registrations">MATRÍCULAS</Link>
           <Link to="/">PEDIDOS DE AUXÍLIO</Link>
         </nav>
         <aside>

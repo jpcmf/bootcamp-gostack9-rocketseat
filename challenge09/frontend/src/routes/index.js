@@ -9,6 +9,8 @@ import PlansList from '~/pages/Plans/List';
 import PlansForm from '~/pages/Plans/Form';
 import StudentsList from '~/pages/Students/List';
 import StudentsForm from '~/pages/Students/Form';
+import RegistrationsList from '~/pages/Registrations/List';
+import RegistrationsForm from '~/pages/Registrations/Form';
 
 export default function Routes() {
   return (
@@ -24,6 +26,23 @@ export default function Routes() {
       <Route path="/plans" component={PlansList} isPrivate exact />
       <Route path="/plans/create" component={PlansForm} isPrivate />
       <Route path="/plans/:id" component={PlansForm} isPrivate />
+
+      <Route
+        path="/registrations"
+        component={RegistrationsList}
+        isPrivate
+        exact
+      />
+      <Route
+        path="/registrations/create"
+        component={RegistrationsForm}
+        isPrivate
+      />
+      <Route
+        path="/registrations/:id"
+        component={RegistrationsForm}
+        isPrivate
+      />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>
