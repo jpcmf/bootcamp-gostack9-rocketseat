@@ -95,6 +95,7 @@ export default function StudentsList() {
           <Form onSubmit={handleSearchSubmit}>
             <MdSearch />
             <TextInput
+              className="search_input"
               type="text"
               name="search"
               placeholder="Buscar por aluno"
