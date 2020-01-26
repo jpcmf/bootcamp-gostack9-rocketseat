@@ -47,6 +47,8 @@ export default function RegistrationsForm({ match }) {
   const [selectedPlan, setSelectedPlan] = useState({});
   const [selectedStartDate, setSelectedStartDate] = useState();
 
+  console.log(plans);
+
   const endDate = useMemo(() => {
     return addMonths(selectedStartDate, selectedPlan.duration);
   }, [selectedPlan, selectedStartDate]);
@@ -54,6 +56,8 @@ export default function RegistrationsForm({ match }) {
   const totalPrice = useMemo(() => {
     return selectedPlan.total_price;
   }, [selectedPlan]);
+
+  console.log('...', totalPrice);
 
   const loadStudents = useCallback(async inputValues => {
     try {
@@ -100,13 +104,13 @@ export default function RegistrationsForm({ match }) {
         return {
           id: plan.id,
           title: formattedTitle,
-          total_price: plan.total_price,
           duration: plan.duration,
+          total_price: plan.price,
         };
       });
 
       setPlans(data);
-    } catch (error) {
+    } catch (_) {
       toast.error('Erro ao carregar os planos.');
     } finally {
       setLoading(false);
@@ -114,8 +118,10 @@ export default function RegistrationsForm({ match }) {
   }, []);
 
   useEffect(() => {
-    document.title = 'Gympoint - Matrículas';
+    document.title = 'GymPoint - Matrículas';
+  }, []);
 
+  useEffect(() => {
     async function loadRegistration() {
       try {
         setLoading(true);
@@ -156,7 +162,7 @@ export default function RegistrationsForm({ match }) {
           student_id: registration.student.id,
           plan_id: registration.plan.id,
         });
-      } catch (error) {
+      } catch (_) {
         toast.error('Erro ao carregar dados da matrícula.');
 
         history.push('/registrations');
@@ -278,3 +284,19 @@ export default function RegistrationsForm({ match }) {
     </Form>
   );
 }
+
+RegistrationsForm.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};
+
+RegistrationsForm.defaultProps = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: null,
+    }),
+  }),
+};

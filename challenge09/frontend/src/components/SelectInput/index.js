@@ -66,6 +66,9 @@ export default function SelectInput({
           setTest(value);
           onChange(value);
         }}
+        onInputChange={value => {
+          onChange(value);
+        }}
         ref={ref}
         loadingMessage={() => 'Carregando...'}
         getOptionValue={option => option.id}
