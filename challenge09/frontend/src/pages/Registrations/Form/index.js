@@ -105,7 +105,7 @@ export default function RegistrationsForm({ match }) {
           id: plan.id,
           title: formattedTitle,
           duration: plan.duration,
-          total_price: plan.price,
+          total_price: plan.price * plan.duration,
         };
       });
 
