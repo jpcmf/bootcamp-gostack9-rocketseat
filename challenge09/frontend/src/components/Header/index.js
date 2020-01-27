@@ -25,8 +25,9 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="Gympoint" />
-
+          <Link to="/students">
+            <img src={logo} alt="Gympoint" />
+          </Link>
           <ItemMenu activeStyle={ActiveStyle} to="/students">
             ALUNOS
           </ItemMenu>
