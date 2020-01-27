@@ -16,9 +16,10 @@ export default function ConfirmAlert({
   confirmButtonText,
   cancelButtonText,
   showButtons,
+  className,
 }) {
   return (
-    <Card onlyConfirmButton={onlyConfirmButton}>
+    <Card onlyConfirmButton={onlyConfirmButton} className={className}>
       <h1>{title}</h1>
       {typeof message === 'object' ? message : <p>{message}</p>}
 
@@ -65,6 +66,7 @@ ConfirmAlert.propTypes = {
   confirmButtonText: PropTypes.string,
   cancelButtonText: PropTypes.string,
   showButtons: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 ConfirmAlert.defaultProps = {
@@ -75,4 +77,5 @@ ConfirmAlert.defaultProps = {
   confirmButtonText: 'SIM',
   cancelButtonText: 'NÃO',
   showButtons: true,
+  className: 'modal-default',
 };

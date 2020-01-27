@@ -8,9 +8,12 @@ export const Card = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  max-width: 420px;
   padding: 30px;
-  width: 100%;
+  margin: 0 30px;
+
+  &.modal-helporders {
+    width: 450px;
+  }
 
   h1 {
     margin-bottom: 15px;
