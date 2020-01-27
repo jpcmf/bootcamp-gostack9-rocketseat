@@ -6,6 +6,7 @@ const Title = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
+  min-height: 36px;
 
   h2 {
     color: #444;

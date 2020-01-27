@@ -33,6 +33,13 @@ export const Table = styled.div`
           font-weight: bold;
           padding-bottom: 5px;
           text-align: left;
+
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(4),
+          &:nth-child(5) {
+            text-align: center;
+          }
         }
       }
     }
@@ -49,6 +56,13 @@ export const Table = styled.div`
           border-bottom: solid 1px ${colors.lightGrey};
           font-size: 16px;
           padding: 17px 0;
+
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(4),
+          &:nth-child(5) {
+            text-align: center;
+          }
 
           &:last-child {
             width: 15%;

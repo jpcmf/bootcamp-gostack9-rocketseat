@@ -3,14 +3,14 @@ import { darken, lighten } from 'polished';
 
 export const Wrapper = styled.div`
   margin: 30px auto;
-  max-width: 1200px;
+  max-width: 900px;
 `;
 
 export const Header = styled.div`
   align-items: center;
   display: flex;
-  margin-bottom: 25px;
   justify-content: space-between;
+  min-height: 36px;
 
   h2 {
     color: #444;
@@ -57,6 +57,7 @@ export const Container = styled.div`
 
   background-color: #fff;
   border-radius: 4px;
+  margin-top: 20px;
   padding: 30px;
 
   form {
