@@ -9,6 +9,7 @@ import PlansList from '~/pages/Plans/List';
 import PlansForm from '~/pages/Plans/Form';
 import StudentsList from '~/pages/Students/List';
 import StudentsForm from '~/pages/Students/Form';
+import HelpOrdersList from '~/pages/HelpOrders';
 import RegistrationsList from '~/pages/Registrations/List';
 import RegistrationsForm from '~/pages/Registrations/Form';
 
@@ -43,6 +44,8 @@ export default function Routes() {
         component={RegistrationsForm}
         isPrivate
       />
+
+      <Route path="/help-orders" component={HelpOrdersList} isPrivate exact />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>
