@@ -52,7 +52,8 @@ routes.get('/registrations/:id', RegistrationController.show);
 routes.put('/registrations/:id', RegistrationController.update);
 routes.delete('/registrations/:id', RegistrationController.delete);
 
-routes.put('/help-orders/:id/answer', HelpOrderController.update);
 routes.get('/help-orders', HelpOrderController.show);
+routes.post('/help-orders/:id/answer', HelpOrderController.store);
+routes.put('/help-orders/:id/answer', HelpOrderController.update);
 
 export default routes;

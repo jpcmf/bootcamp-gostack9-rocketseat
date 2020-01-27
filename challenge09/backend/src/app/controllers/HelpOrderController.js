@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import Queue from '../../lib/Queue';
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
@@ -88,6 +89,14 @@ class HelpOrderController {
   async show(req, res) {
     const helpOrders = await HelpOrder.findAll({
       where: { answer: null },
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
+      order: [['created_at']],
     });
 
     return res.json(helpOrders);
