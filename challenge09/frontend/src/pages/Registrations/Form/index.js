@@ -47,8 +47,6 @@ export default function RegistrationsForm({ match }) {
   const [selectedPlan, setSelectedPlan] = useState({});
   const [selectedStartDate, setSelectedStartDate] = useState();
 
-  console.log(plans);
-
   const endDate = useMemo(() => {
     return addMonths(selectedStartDate, selectedPlan.duration);
   }, [selectedPlan, selectedStartDate]);
@@ -56,8 +54,6 @@ export default function RegistrationsForm({ match }) {
   const totalPrice = useMemo(() => {
     return selectedPlan.total_price;
   }, [selectedPlan]);
-
-  console.log('...', totalPrice);
 
   const loadStudents = useCallback(async inputValues => {
     try {
