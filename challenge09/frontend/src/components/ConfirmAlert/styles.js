@@ -13,15 +13,24 @@ export const Card = styled.div`
 
   &.modal-helporders {
     width: 450px;
+
+    button {
+      height: 45px;
+      font-size: 16px;
+    }
   }
 
   h1 {
-    margin-bottom: 15px;
-    font-size: 18px;
+    color: ${colors.dark};
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
   }
 
   p {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 26px;
     margin-bottom: 20px;
 
     strong {
