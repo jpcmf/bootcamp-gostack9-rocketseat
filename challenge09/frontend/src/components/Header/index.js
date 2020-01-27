@@ -6,11 +6,16 @@ import { signOut } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo2-gympoint@2x.png';
 
-import { Container, Content, Profile } from './styles';
+import { Container, Content, ItemMenu, Profile } from './styles';
+
+import colors from '~/styles/colors';
 
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
   const dispatch = useDispatch();
+  const ActiveStyle = {
+    color: `${colors.dark}`,
+  };
 
   function handleSignOut() {
     dispatch(signOut());
@@ -21,10 +26,19 @@ export default function Header() {
       <Content>
         <nav>
           <img src={logo} alt="Gympoint" />
-          <Link to="/students">ALUNOS</Link>
-          <Link to="/plans">PLANOS</Link>
-          <Link to="/registrations">MATRÍCULAS</Link>
-          <Link to="/">PEDIDOS DE AUXÍLIO</Link>
+
+          <ItemMenu activeStyle={ActiveStyle} to="/students">
+            ALUNOS
+          </ItemMenu>
+          <ItemMenu activeStyle={ActiveStyle} to="/plans">
+            PLANOS
+          </ItemMenu>
+          <ItemMenu activeStyle={ActiveStyle} to="/registrations">
+            MATRÍCULAS
+          </ItemMenu>
+          <ItemMenu activeStyle={ActiveStyle} to="/help-orders">
+            PEDIDOS DE AUXÍLIO
+          </ItemMenu>
         </nav>
         <aside>
           <Profile>

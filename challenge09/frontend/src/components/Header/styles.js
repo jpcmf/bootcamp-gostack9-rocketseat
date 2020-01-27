@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
+import { NavLink } from 'react-router-dom';
+
+import colors from '~/styles/colors';
 
 export const Container = styled.header`
   background-color: #fff;
@@ -24,7 +27,7 @@ export const Content = styled.div`
       padding-right: 30px;
     }
 
-    a {
+    /* a {
       color: #999999;
       font-size: 15px;
       font-weight: bold;
@@ -34,12 +37,24 @@ export const Content = styled.div`
       &:hover {
         color: #444;
       }
-    }
+    } */
   }
 
   aside {
     align-items: center;
     display: flex;
+  }
+`;
+
+export const ItemMenu = styled(NavLink)`
+  color: ${colors.darkGrey};
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0 10px;
+  transition: all 300ms ease;
+
+  &:hover {
+    color: #444;
   }
 `;
 
