@@ -3,20 +3,19 @@ import { Form } from '@unform/web';
 import { Scope } from '@unform/core';
 import * as Yup from 'yup';
 
-import './App.css';
-
 import Input from './components/Form/Input';
 
 function App() {
   const formRef = useRef(null);
 
   // initialData when the data is static
-  const initialData = {
-    email: 'jpfricks@gmail.com',
-    address: {
-      city: 'Curitiba'
-    }
-  }
+  // dont forget initialData={}
+  // const initialData = {
+  //   email: 'jpfricks@gmail.com',
+  //   address: {
+  //     city: 'Curitiba'
+  //   }
+  // }
 
   async function handleSubmit(data, { reset }) {
     try {
