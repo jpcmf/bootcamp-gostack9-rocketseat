@@ -1,6 +1,6 @@
 .DS_Store
 .vscode/
-/module*
+# /module*
 /lives
 /GoBarber
 ngrok
