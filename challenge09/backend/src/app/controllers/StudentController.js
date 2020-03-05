@@ -8,12 +8,12 @@ class StudentController {
     const { q: query = '' } = req.query;
 
     const students = await Student.findAll({
-      order: ['name'],
       where: {
         name: {
           [Op.iLike]: `%${query}%`,
         },
       },
+      order: ['name'],
       include: [
         {
           model: File,
