@@ -189,16 +189,11 @@ class RegistrationController {
       return res.status(404).json({ error: 'Registration not found.' });
     }
 
-    try {
-      await registrationExists.destroy({
-        where: { id },
-      });
-      return res
-        .status(400)
-        .json({ success: 'Registration deleted with success.' });
-    } catch (err) {
-      return res.status(400).json({ error: 'Delete fails.' });
-    }
+    await registrationExists.destroy({
+      where: { id },
+    });
+
+    return res.send();
   }
 }
 

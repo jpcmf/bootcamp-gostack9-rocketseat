@@ -15,7 +15,9 @@ import { formatPrice } from '~/util/format';
 import Title from '~/components/Title';
 import Button from '~/components/Button';
 import Container from '~/components/Container';
+import TextInput from '~/components/TextInput';
 import SelectInput from '~/components/SelectInput';
+import ReactAsyncSelect from '~/components/AsyncSelect';
 import CurrencyInput from '~/components/CurrencyInput';
 import DatePickerInput from '~/components/DatePickerInput';
 
@@ -30,6 +32,7 @@ const schema = Yup.object().shape({
   student_id: Yup.number()
     .typeError('Aluno é obrigatório.')
     .required('Aluno é obrigatório.'),
+  student_name: Yup.string(),
   plan_id: Yup.number()
     .typeError('Plano é obrigatório.')
     .required('Plano é obrigatório.'),
@@ -42,49 +45,65 @@ export default function RegistrationsForm({ match }) {
   const [initialData, setInitialData] = useState();
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
+  const [student, setStudent] = useState();
   const [plans, setPlans] = useState([]);
 
   const [selectedPlan, setSelectedPlan] = useState({});
   const [selectedStartDate, setSelectedStartDate] = useState();
 
+  const [totalPrice, setTotalPrice] = useState();
+
   const endDate = useMemo(() => {
+    console.log('selectedStartDate', selectedStartDate);
+
     return addMonths(selectedStartDate, selectedPlan.duration);
   }, [selectedPlan, selectedStartDate]);
 
-  const totalPrice = useMemo(() => {
-    return selectedPlan.total_price;
-  }, [selectedPlan]);
+  console.log('endDate', endDate);
 
-  const loadStudents = useCallback(async inputValues => {
+  // const totalPrice = useMemo(() => {
+  //   if (selectedPlan.total_price !== undefined) {
+  //     return selectedPlan.total_price;
+  //   }
+  // }, [selectedPlan.total_price]);
+
+  const loadStudents = async (inputValue, callback) => {
     try {
-      setLoading(true);
-
-      const response = await api.get('students', {
+      const response = await api.get('/students', {
         params: {
-          q: inputValues,
+          q: inputValue,
         },
       });
 
-      const data = response.data.map(student => ({
-        id: student.id,
-        title: student.name,
-      }));
-
-      setStudents(data);
-    } catch (_) {
-      return toast.error('Erro ao carregar os alunos.');
-    } finally {
-      setLoading(false);
+      if (response.status === 200) {
+        setStudents(
+          response.data.map(studentMap => ({
+            id: studentMap.id,
+            name: studentMap.name,
+          }))
+        );
+        callback(students);
+      } else {
+        setStudents();
+        callback();
+      }
+    } catch (error) {
+      setStudents();
+      callback();
     }
-  }, []);
+  };
 
-  const loadPlans = useCallback(async inputValues => {
+  function handleStudent(selectedOption) {
+    setStudent(selectedOption);
+  }
+
+  const loadPlans = useCallback(async inputValue => {
     try {
       setLoading(true);
 
-      const response = await api.get('plans', {
+      const response = await api.get('/plans', {
         params: {
-          q: inputValues,
+          q: inputValue,
         },
       });
 
@@ -100,12 +119,15 @@ export default function RegistrationsForm({ match }) {
         return {
           id: plan.id,
           title: formattedTitle,
-          duration: plan.duration,
+          // total_price: plan.total_price,
           total_price: plan.price * plan.duration,
+          duration: plan.duration,
         };
       });
 
       setPlans(data);
+
+      // return data;
     } catch (_) {
       toast.error('Erro ao carregar os planos.');
     } finally {
@@ -138,7 +160,11 @@ export default function RegistrationsForm({ match }) {
 
         setStudents([
           ...students,
-          { id: registration.student.id, title: registration.student.name },
+          {
+            id: registration.student.id,
+            name: registration.student.name,
+            title: registration.student.name,
+          },
         ]);
 
         setSelectedPlan({
@@ -156,6 +182,7 @@ export default function RegistrationsForm({ match }) {
         setInitialData({
           start_date: parseISO(registration.start_date),
           student_id: registration.student.id,
+          student_name: registration.student.name,
           plan_id: registration.plan.id,
         });
       } catch (_) {
@@ -179,10 +206,11 @@ export default function RegistrationsForm({ match }) {
       try {
         setLoading(true);
 
-        const { student_id, plan_id, start_date } = data;
+        const { student_id, student_name, plan_id, start_date } = data;
 
         await api.put(`/registrations/${id}`, {
           student_id,
+          student_name,
           plan_id,
           start_date,
         });
@@ -212,6 +240,14 @@ export default function RegistrationsForm({ match }) {
     }
   }
 
+  function handleSelect(e) {
+    setSelectedPlan(e);
+
+    if (e) {
+      setTotalPrice(e.total_price);
+    }
+  }
+
   return (
     <Form initialData={initialData} schema={schema} onSubmit={handleSubmit}>
       <Container>
@@ -235,21 +271,31 @@ export default function RegistrationsForm({ match }) {
           </div>
         </Title>
         <Content>
-          <SelectInput
-            name="student_id"
-            isDisabled={loading}
-            options={students}
-            label="ALUNO"
-            placeholder="Buscar aluno"
-            noOptionsMessage={() => 'Não há alunos.'}
-            loadOptions={loadStudents}
-            cacheOptions
-          />
+          {id ? (
+            <TextInput
+              name="student_name"
+              id="student_name"
+              label="ALUNO"
+              disabled
+            />
+          ) : (
+            <ReactAsyncSelect
+              name="student_id"
+              options={loadStudents}
+              onChange={handleStudent}
+              value={student}
+              isDisabled={loading}
+              label="ALUNO"
+              placeholder="Buscar aluno"
+              noOptionsMessage={() => 'Não há alunos.'}
+              loadingMessage={() => 'Carregando...'}
+            />
+          )}
           <SelectInput
             name="plan_id"
             isDisabled={loading}
             options={plans}
-            onChange={setSelectedPlan}
+            onChange={handleSelect}
             label="PLANO"
             placeholder="Selecione o plano"
             noOptionsMessage={() => 'Não há planos.'}

@@ -68,7 +68,7 @@ export default function RegistrationsList() {
         toast.success('Matrícula excluída com sucesso.');
 
         setRegistrations(
-          registration.filter(
+          registrations.filter(
             currentRegistration => currentRegistration.id !== registration.id
           )
         );
