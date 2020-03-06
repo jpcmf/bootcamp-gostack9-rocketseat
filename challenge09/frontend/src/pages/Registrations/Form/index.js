@@ -51,13 +51,21 @@ export default function RegistrationsForm({ match }) {
   const [selectedPlan, setSelectedPlan] = useState({});
   const [selectedStartDate, setSelectedStartDate] = useState();
 
+  const [totalPrice, setTotalPrice] = useState();
+
   const endDate = useMemo(() => {
+    console.log('selectedStartDate', selectedStartDate);
+
     return addMonths(selectedStartDate, selectedPlan.duration);
   }, [selectedPlan, selectedStartDate]);
 
-  const totalPrice = useMemo(() => {
-    return selectedPlan.total_price;
-  }, [selectedPlan]);
+  console.log('endDate', endDate);
+
+  // const totalPrice = useMemo(() => {
+  //   if (selectedPlan.total_price !== undefined) {
+  //     return selectedPlan.total_price;
+  //   }
+  // }, [selectedPlan.total_price]);
 
   const loadStudents = async (inputValue, callback) => {
     try {
@@ -66,8 +74,6 @@ export default function RegistrationsForm({ match }) {
           q: inputValue,
         },
       });
-
-      console.log(response.data);
 
       if (response.status === 200) {
         setStudents(
@@ -88,7 +94,6 @@ export default function RegistrationsForm({ match }) {
   };
 
   function handleStudent(selectedOption) {
-    console.log(selectedOption);
     setStudent(selectedOption);
   }
 
@@ -96,7 +101,7 @@ export default function RegistrationsForm({ match }) {
     try {
       setLoading(true);
 
-      const response = await api.get('plans', {
+      const response = await api.get('/plans', {
         params: {
           q: inputValue,
         },
@@ -114,15 +119,16 @@ export default function RegistrationsForm({ match }) {
         return {
           id: plan.id,
           title: formattedTitle,
-          duration: plan.duration,
+          // total_price: plan.total_price,
           total_price: plan.price * plan.duration,
+          duration: plan.duration,
         };
       });
 
       setPlans(data);
 
-      return data;
-    } catch (err) {
+      // return data;
+    } catch (_) {
       toast.error('Erro ao carregar os planos.');
     } finally {
       setLoading(false);
@@ -141,8 +147,6 @@ export default function RegistrationsForm({ match }) {
         const response = await api.get(`/registrations/${id}`);
 
         const { data: registration } = response;
-
-        console.log('loadRegistration...', response.data);
 
         const formattedTitle = `${registration.plan.title} - ${formatPrice(
           registration.plan.price
@@ -204,8 +208,6 @@ export default function RegistrationsForm({ match }) {
 
         const { student_id, student_name, plan_id, start_date } = data;
 
-        console.log('data edit...', data);
-
         await api.put(`/registrations/${id}`, {
           student_id,
           student_name,
@@ -224,7 +226,6 @@ export default function RegistrationsForm({ match }) {
     } else {
       try {
         const { student_id, plan_id, start_date } = data;
-        console.log('data create...', data);
 
         await api.post(`/registrations`, { student_id, plan_id, start_date });
 
@@ -236,6 +237,14 @@ export default function RegistrationsForm({ match }) {
       } finally {
         setLoading(false);
       }
+    }
+  }
+
+  function handleSelect(e) {
+    setSelectedPlan(e);
+
+    if (e) {
+      setTotalPrice(e.total_price);
     }
   }
 
@@ -286,7 +295,7 @@ export default function RegistrationsForm({ match }) {
             name="plan_id"
             isDisabled={loading}
             options={plans}
-            onChange={setSelectedPlan}
+            onChange={handleSelect}
             label="PLANO"
             placeholder="Selecione o plano"
             noOptionsMessage={() => 'Não há planos.'}
