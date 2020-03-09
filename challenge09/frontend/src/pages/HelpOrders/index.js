@@ -59,7 +59,9 @@ export default function HelpOrdersList() {
     }
 
     confirmAlert({
-      customUI: ({ onClose }) => ( // eslint-disable-line
+      customUI: (
+        { onClose } // eslint-disable-line
+      ) => (
         <ConfirmAlert
           className="modal-helporders"
           onClose={onClose}
@@ -114,7 +116,7 @@ export default function HelpOrdersList() {
               ) : (
                 helpOrders.map(helpOrder => (
                   <tr key={helpOrder.id}>
-                    <td>{helpOrder.student.name}</td>
+                    <td>{helpOrder.student && helpOrder.student.name}</td>
                     <td>
                       <div className="actions">
                         <button
