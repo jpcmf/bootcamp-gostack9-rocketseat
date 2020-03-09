@@ -40,22 +40,25 @@ export default function ReactAsyncSelect({
 
   return (
     <SelectInputWrapper>
-      {label && <label htmlFor={fieldName}>{label}</label>}
+      {label && (
+        <label htmlFor={fieldName}>
+          {label}
+          <AsyncSelect
+            id={fieldName}
+            name={fieldName}
+            aria-label={fieldName}
+            cacheOptions
+            defaultOptions
+            loadOptions={options}
+            getOptionValue={option => option.id}
+            getOptionLabel={option => option.name}
+            ref={ref}
+            {...rest}
+          />
 
-      <AsyncSelect
-        id={fieldName}
-        name={fieldName}
-        aria-label={fieldName}
-        cacheOptions
-        defaultOptions
-        loadOptions={options}
-        getOptionValue={option => option.id}
-        getOptionLabel={option => option.name}
-        ref={ref}
-        {...rest}
-      />
-
-      {error && <span>{error}</span>}
+          {error && <span>{error}</span>}
+        </label>
+      )}
     </SelectInputWrapper>
   );
 }

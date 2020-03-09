@@ -11,7 +11,25 @@ export const SelectInputWrapper = styled.div`
     font-size: 14px;
     font-weight: bold;
     line-height: 16px;
-    margin-bottom: 8px;
+
+    > div {
+      margin-top: 8px;
+      width: 100%;
+
+      > div {
+        border: solid 1px ${colors.grey};
+
+        .css-b8ldur-Input {
+          padding: 9.5px 0;
+        }
+
+        .css-1wa3eu0-placeholder,
+        .css-1uccc91-singleValue {
+          font-size: 16px;
+          font-weight: normal;
+        }
+      }
+    }
   }
 
   & > div > div:nth-child(1),
