@@ -29,6 +29,7 @@ export const DatePicketInputWrapper = styled.div`
     height: 45px;
     padding: 0 15px;
     width: 100%;
+    font-size: 16px;
 
     &::placeholder {
       color: ${colors.grey};

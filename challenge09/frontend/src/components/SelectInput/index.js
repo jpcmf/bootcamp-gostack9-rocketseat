@@ -53,29 +53,29 @@ export default function SelectInput({
 
   return (
     <SelectInputWrapper>
-      {label && <label htmlFor={fieldName}>{label}</label>}
-
-      <Select
-        name={fieldName}
-        aria-label={fieldName}
-        defaultOptions={options}
-        isMulti={multiple}
-        defaultValue={test}
-        value={test}
-        onChange={value => {
-          setTest(value);
-          onChange(value);
-        }}
-        onInputChange={value => {
-          onChange(value);
-        }}
-        ref={ref}
-        loadingMessage={() => 'Carregando...'}
-        getOptionValue={option => option.id}
-        getOptionLabel={option => option.title}
-        {...rest}
-      />
-      {error && <span>{error}</span>}
+      {label && (
+        <label htmlFor={fieldName}>
+          {label}
+          <Select
+            name={fieldName}
+            aria-label={fieldName}
+            defaultOptions={options}
+            isMulti={multiple}
+            defaultValue={test}
+            value={test}
+            onChange={value => {
+              setTest(value);
+              onChange(value);
+            }}
+            ref={ref}
+            loadingMessage={() => 'Carregando...'}
+            getOptionValue={option => option.id}
+            getOptionLabel={option => option.title}
+            {...rest}
+          />
+          {error && <span>{error}</span>}
+        </label>
+      )}
     </SelectInputWrapper>
   );
 }
