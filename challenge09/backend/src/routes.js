@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 import CheckinController from './app/controllers/CheckinController';
+import DashboardController from './app/controllers/DashboardController';
 import HelpOrderController from './app/controllers/HelpOrderController';
 import RegistrationController from './app/controllers/RegistrationController';
 
@@ -27,6 +28,8 @@ routes.get('/students/:id/help-orders', HelpOrderController.index);
 
 routes.use(authMiddleware);
 routes.use(adminMiddleware);
+
+routes.get('/dashboard', DashboardController.index);
 
 routes.post('/plans', PlanController.store);
 routes.get('/plans', PlanController.index);
