@@ -93,6 +93,7 @@ export const Table = styled.div`
               appearance: none;
               border: 0;
               color: ${colors.danger};
+              font-size: 16px;
               margin-left: 20px;
 
               &:hover {
