@@ -6,8 +6,9 @@ import HelpOrderMail from '../jobs/HelpOrderMail';
 
 class HelpOrderController {
   async index(req, res) {
+    const { page = 1, limit = 10 } = req.query;
+
     const { id } = req.params;
-    const { page = 1, quantity = 20 } = req.query;
 
     if (!id) {
       return res.status(400).json({ error: 'Invalid ID.' });
@@ -19,29 +20,21 @@ class HelpOrderController {
       return res.status(400).json({ error: 'Student not found.' });
     }
 
-    const { rows: helpOrders, count } = await HelpOrder.findAndCountAll({
-      where: { answer: null },
-      limit: quantity,
-      offset: (page - 1) * quantity,
-      include: [
-        {
-          model: Student,
-          as: 'student',
-          attributes: ['id', 'name', 'email'],
-        },
+    const helpOrders = await HelpOrder.findAndCountAll({
+      where: { student_id: id },
+      order: [['created_at', 'DESC']],
+      attributes: [
+        'id',
+        'question',
+        'answer',
+        'answer_at',
+        ['created_at', 'createdAt'],
       ],
-      order: [['created_at']],
+      limit,
+      offset: (page - 1) * limit,
     });
 
-    return res
-      .set({ total_pages: Math.ceil(count / quantity) })
-      .json(helpOrders);
-
-    // const orders = await HelpOrder.findAll({
-    //   where: { student_id: id },
-    // });
-
-    // return res.json(orders);
+    return res.json(helpOrders);
   }
 
   async store(req, res) {
