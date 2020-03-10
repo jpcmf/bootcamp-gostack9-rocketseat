@@ -6,13 +6,20 @@ import Student from '../models/Student';
 
 class CheckinController {
   async index(req, res) {
+    const { page = 1, limit = 10 } = req.query;
     const { id } = req.params;
 
     if (!id) {
       return res.status(400).json({ error: 'Invalid ID.' });
     }
 
-    const checkins = await Checkin.findAll({ where: { student_id: id } });
+    const checkins = await Checkin.findAndCountAll({
+      where: { student_id: { [Op.eq]: id } },
+      order: [['created_at', 'DESC']],
+      attributes: ['id', ['created_at', 'createdAt']],
+      limit,
+      offset: (page - 1) * limit,
+    });
 
     return res.json(checkins);
   }
