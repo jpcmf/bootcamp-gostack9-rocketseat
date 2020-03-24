@@ -11,6 +11,7 @@ import CheckinController from './app/controllers/CheckinController';
 import DashboardController from './app/controllers/DashboardController';
 import HelpOrderController from './app/controllers/HelpOrderController';
 import RegistrationController from './app/controllers/RegistrationController';
+import SessionStudentController from './app/controllers/SessionStudentController';
 
 import authMiddleware from './app/middlewares/auth';
 import adminMiddleware from './app/middlewares/admin';
@@ -19,6 +20,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
+routes.post('/sessions/student', SessionStudentController.store);
 
 routes.post('/students/:id/checkins', CheckinController.store);
 routes.get('/students/:id/checkins', CheckinController.index);
